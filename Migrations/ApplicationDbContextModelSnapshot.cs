@@ -97,7 +97,7 @@ namespace ManageProjects.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityId")
+                    b.Property<string>("IdentityyId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
@@ -108,7 +108,9 @@ namespace ManageProjects.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityId");
+                    b.HasIndex("IdentityyId")
+                        .IsUnique()
+                        .HasFilter("[IdentityyId] IS NOT NULL");
 
                     b.HasIndex("TeamId");
 
@@ -324,9 +326,9 @@ namespace ManageProjects.Migrations
 
             modelBuilder.Entity("ManageProjects.Models.MyUser", b =>
                 {
-                    b.HasOne("ManageProjects.Models.ApplicationUser", "ApplicationUsers")
-                        .WithMany("MyUsers")
-                        .HasForeignKey("IdentityId");
+                    b.HasOne("ManageProjects.Models.ApplicationUser", "ApplicationUser")
+                        .WithOne("MyUser")
+                        .HasForeignKey("ManageProjects.Models.MyUser", "IdentityyId");
 
                     b.HasOne("ManageProjects.Models.Team", "Teams")
                         .WithMany("MyUsers")

@@ -13,8 +13,8 @@ namespace ManageProjects.Models
         public DateTime CreatedAt { get; set; }
         public Team Teams { get; set; }
         public int? TeamId { get; set; }
-        public string IdentityId { get; set; }
-        public virtual ApplicationUser ApplicationUsers { get; set; }
+        public string IdentityyId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
     }
 }

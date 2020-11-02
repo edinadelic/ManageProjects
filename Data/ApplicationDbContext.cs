@@ -17,10 +17,9 @@ namespace ManageProjects.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>()
-
-                       .HasMany(e => e.MyUsers)
-                       .WithOne(a => a.ApplicationUsers)
-                       .HasForeignKey(e => e.IdentityId);
+                       .HasOne(m => m.MyUser)
+                       .WithOne(a => a.ApplicationUser)
+                       .HasForeignKey<MyUser>(u => u.IdentityyId );
         }
         public virtual DbSet<MyUser> MyUsers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }

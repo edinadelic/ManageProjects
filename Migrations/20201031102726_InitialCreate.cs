@@ -175,14 +175,14 @@ namespace ManageProjects.Migrations
                     LastName = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     TeamId = table.Column<int>(nullable: true),
-                    IdentityId = table.Column<string>(nullable: true)
+                    IdentityyId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MyUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MyUsers_AspNetUsers_IdentityId",
-                        column: x => x.IdentityId,
+                        name: "FK_MyUsers_AspNetUsers_IdentityyId",
+                        column: x => x.IdentityyId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -281,9 +281,11 @@ namespace ManageProjects.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MyUsers_IdentityId",
+                name: "IX_MyUsers_IdentityyId",
                 table: "MyUsers",
-                column: "IdentityId");
+                column: "IdentityyId",
+                unique: true,
+                filter: "[IdentityyId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MyUsers_TeamId",

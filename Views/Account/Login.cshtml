@@ -1,0 +1,22 @@
+﻿@model LoginViewModel
+    <div class="container">
+        <div class="col-md-3">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <header>
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            </header>
+            <form class="form-group" asp-action="Login" method="post">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <input type="email" class="form-control" asp-for="Email" placeholder="Email Address" required autofocus />
+                <input type="password" class="form-control mt-1" asp-for="Password" placeholder="Password" required />
+                <div class="checkbox mb-3 mt-1">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <div class="submit-container">
+                    <button class="btn btn-primary" type="submit">SIGN IN</button>
+                </div>
+            </form>
+        </div>
+    </div>

@@ -14,7 +14,6 @@ namespace ManageProjects.Data
       Task<MyUser> GetUser(string id);
       Task<bool> CreateUser(UserViewModel user);
       Task<bool> UpdateUser(string id, string email, string password);
-      void DeleteUser(string userId);
-      Task<bool> SaveAllAsync();
+      Task DeleteUser(string userId);
     }
 }
