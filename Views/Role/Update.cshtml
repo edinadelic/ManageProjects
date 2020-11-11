@@ -1,0 +1,59 @@
+﻿@model RoleEdit
+@{
+    ViewData["Title"] = "Update Role";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+
+    <a asp-action="Index" class="btn btn-primary">Back to Roles</a>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form method="post">
+        <input type="hidden" value="@Model.Role.Name" name="roleName" />
+        <input type="hidden" value="@Model.Role.Id" name="roleId" />
+        <h3>Add to @Model.Role.Name</h3>
+        <table class="table">
+            @if (Model.NonMembers.Count() == 0)
+            {
+                <tr>
+                    <td colspan="2">All Users are Members</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (ApplicationUser user in Model.NonMembers)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" name="AddIds" value="@user.Id" />
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+        <h3> Remove from @Model.Role.Name</h3>
+        <table class="table">
+            @if (Model.Members.Count() == 0)
+            {
+                <tr>
+                    <td>No members in the role</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (ApplicationUser user in Model.Members)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" name="DeleteIds" value="@user.Id" />
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>

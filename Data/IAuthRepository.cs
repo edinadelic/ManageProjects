@@ -15,5 +15,15 @@ namespace ManageProjects.Data
       Task<bool> CreateUser(UserViewModel user);
       Task<bool> UpdateUser(string id, string email, string password);
       Task DeleteUser(string userId);
+       
+        //Methods for manipulating Roles
+      Task<IdentityRole> GetRole(string id);
+      Task<bool> CreateRole(string name);
+      Task<bool> DeleteRole(string id);
+      Task<RoleEdit> GetMembersForRole(IdentityRole role);
+      Task<bool> UpdateUsersRoles(RoleModification model);
+     
+
+
     }
 }

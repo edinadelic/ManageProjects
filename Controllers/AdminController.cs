@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -65,7 +66,7 @@ namespace ManageProjects.Controllers
             var userFromRepo = await _repository.GetUser(id);
             if (userFromRepo == null )
             {
-                ModelState.AddModelError("", "User not found");
+                throw new NullReferenceException("User not found");
             }
             else
             {
@@ -91,28 +92,18 @@ namespace ManageProjects.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, string email, string password)
+        public async Task<IActionResult> Update(string id,[Required] string email, [Required] string password)
         {
-            if (string.IsNullOrEmpty(email))
-            {
-                ModelState.AddModelError("", "Email cannot be empty");
-            }
-            if (string.IsNullOrEmpty(password))
-            {
-                ModelState.AddModelError("", "Password cannot be empty");
-            }
             var user = await _repository.GetUser(id);
             if (user != null)
             {
-                await _repository.UpdateUser(id, email, password);
-
+                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                {
+                    await _repository.UpdateUser(id, email, password);
+                    return RedirectToAction("Index");
+                }
             }
-            else
-            {
-                ModelState.AddModelError("", "User not found");
-                return RedirectToAction("Index");
-            }
-           return RedirectToAction("Index");
+            return View();
         }
     }
 }
