@@ -69,13 +69,16 @@ namespace ManageProjects.Data
         public async Task<bool> DeleteRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id); 
-            if (role == null)
+            if (role != null)
             {
-                return false;
+                IdentityResult result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return true;
+                }
+
             }
-            IdentityResult result = await _roleManager.DeleteAsync(role);
-            return true;
-   
+            return false;
         }
 
         public async Task DeleteUser(string userId)
